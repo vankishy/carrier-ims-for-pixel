@@ -33,7 +33,7 @@ class ImsModifier : Instrumentation() {
         private const val BUNDLE_COUNTRY_MCC_OVERRIDE = "country_mcc_override"
         private const val BUNDLE_COUNTRY_MNC_HINT = "country_mnc_hint"
         private val NR_ADVANCED_BANDS_FOR_CHINA = intArrayOf(
-            1, 3, 8, 28, 41, 78, 79
+            1, 3, 8, 28, 40, 41, 78, 79
         )
         const val BUNDLE_SELECT_SIM_ID = "select_sim_id"
         const val BUNDLE_RESET = "reset"
@@ -86,6 +86,7 @@ class ImsModifier : Instrumentation() {
             // VoLTE 配置
             if (enableVoLTE) {
                 bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_VOLTE_AVAILABLE_BOOL, true)
+                bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_VOLTE_PROVISIONED_BOOL, true)
                 bundle.putBoolean(CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL, true)
                 bundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL, false)
                 bundle.putBoolean(CarrierConfigManager.KEY_HIDE_LTE_PLUS_DATA_ICON_BOOL, false)
@@ -121,6 +122,7 @@ class ImsModifier : Instrumentation() {
             // VoWiFi 配置
             if (enableVoWiFi) {
                 bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_WFC_IMS_AVAILABLE_BOOL, true)
+                bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_WFC_IMS_PROVISIONED_BOOL, true)
                 bundle.putBoolean(
                     CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL,
                     true
@@ -150,6 +152,7 @@ class ImsModifier : Instrumentation() {
                         CarrierConfigManager.CARRIER_NR_AVAILABILITY_SA
                     )
                 )
+                bundle.putIntArray("nr_bands_int_array", intArrayOf(1, 3, 8, 28, 40, 41, 78, 79))
                 if (enable5GPlusIcon) {
                     // 5GA / 5G+ 图标判定逻辑：
                     // 1) 只有达到较高 NR 聚合带宽（这里使用 110MHz）才进入 NR Advanced；

@@ -363,14 +363,14 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
         // 构建传递给底层 ImsModifier 的配置 Bundle
         val carrierName: String? = null
         val enableTikTokFix = (map[Feature.TIKTOK_NETWORK_FIX]?.data ?: false) as Boolean
-        val countryISO =
-            if (selectedSim.subId == -1) null else resolveCountryIsoOverrideForApply(
-                selectedSim,
-                enableTikTokFix
-            )
-        val countryMcc: String? = null
-        val countryMnc =
-            if (selectedSim.subId == -1) null else selectedSim.mnc
+        val explicitIsoOverride = (map[Feature.COUNTRY_ISO]?.data as? String)?.takeIf { it.isNotBlank() }
+        val countryISO = if (selectedSim.subId == -1) {
+            null 
+        } else {
+            explicitIsoOverride ?: resolveCountryIsoOverrideForApply(selectedSim, enableTikTokFix)
+        }
+        val countryMcc = if (selectedSim.subId == -1) null else countryMccOverride
+        val countryMnc = if (selectedSim.subId == -1) null else selectedSim.mnc
         val enableVoLTE = (map[Feature.VOLTE]?.data ?: true) as Boolean
         val enableVoWiFi = (map[Feature.VOWIFI]?.data ?: true) as Boolean
         val enableVT = (map[Feature.VT]?.data ?: true) as Boolean
