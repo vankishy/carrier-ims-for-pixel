@@ -86,7 +86,7 @@ class ImsModifier : Instrumentation() {
             // VoLTE 配置
             if (enableVoLTE) {
                 bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_VOLTE_AVAILABLE_BOOL, true)
-                bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_VOLTE_PROVISIONED_BOOL, true)
+                bundle.putBoolean("carrier_volte_provisioned_bool", true)
                 bundle.putBoolean(CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL, true)
                 bundle.putBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL, false)
                 bundle.putBoolean(CarrierConfigManager.KEY_HIDE_LTE_PLUS_DATA_ICON_BOOL, false)
@@ -122,7 +122,7 @@ class ImsModifier : Instrumentation() {
             // VoWiFi 配置
             if (enableVoWiFi) {
                 bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_WFC_IMS_AVAILABLE_BOOL, true)
-                bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_WFC_IMS_PROVISIONED_BOOL, true)
+                bundle.putBoolean("carrier_wfc_ims_provisioned_bool", true)
                 bundle.putBoolean(
                     CarrierConfigManager.KEY_CARRIER_WFC_SUPPORTS_WIFI_ONLY_BOOL,
                     true
