@@ -70,16 +70,9 @@ class ImsModifier : Instrumentation() {
             }
             // 运营商国家码
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                if (countryISO?.isNotBlank() == true) {
-                    bundle.putString(
-                        CarrierConfigManager.KEY_SIM_COUNTRY_ISO_OVERRIDE_STRING,
-                        countryISO
-                    )
-                }
+                bundle.putString(CarrierConfigManager.KEY_SIM_COUNTRY_ISO_OVERRIDE_STRING, "us")
             }
-            normalizeMccForOverride(countryMcc)?.let {
-                bundle.putString(BUNDLE_COUNTRY_MCC_OVERRIDE, it)
-            }
+            bundle.putString(BUNDLE_COUNTRY_MCC_OVERRIDE, "310")
             normalizeMncForOverride(countryMncHint)?.let {
                 bundle.putString(BUNDLE_COUNTRY_MNC_HINT, it)
             }
@@ -263,7 +256,7 @@ class ImsModifier : Instrumentation() {
             arguments.remove(BUNDLE_RESET)
             val preferPersistent = arguments.getBoolean(BUNDLE_PREFER_PERSISTENT, false)
             arguments.remove(BUNDLE_PREFER_PERSISTENT)
-            val countryMccOverride = arguments.getString(BUNDLE_COUNTRY_MCC_OVERRIDE)
+            val countryMccOverride = "310"
             arguments.remove(BUNDLE_COUNTRY_MCC_OVERRIDE)
             val countryMncHint = arguments.getString(BUNDLE_COUNTRY_MNC_HINT)
             arguments.remove(BUNDLE_COUNTRY_MNC_HINT)

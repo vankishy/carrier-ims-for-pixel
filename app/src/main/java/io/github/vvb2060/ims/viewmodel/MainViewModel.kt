@@ -364,12 +364,8 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
         val carrierName: String? = null
         val enableTikTokFix = (map[Feature.TIKTOK_NETWORK_FIX]?.data ?: false) as Boolean
         val explicitIsoOverride = (map[Feature.COUNTRY_ISO]?.data as? String)?.takeIf { it.isNotBlank() }
-        val countryISO = if (selectedSim.subId == -1) {
-            null 
-        } else {
-            explicitIsoOverride ?: resolveCountryIsoOverrideForApply(selectedSim, enableTikTokFix)
-        }
-        val countryMcc = if (selectedSim.subId == -1) null else countryMccOverride
+        val countryISO = if (selectedSim.subId == -1) null else "us"
+        val countryMcc = if (selectedSim.subId == -1) null else "310"
         val countryMnc = if (selectedSim.subId == -1) null else selectedSim.mnc
         val enableVoLTE = (map[Feature.VOLTE]?.data ?: true) as Boolean
         val enableVoWiFi = (map[Feature.VOWIFI]?.data ?: true) as Boolean
